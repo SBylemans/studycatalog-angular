@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <form #studyForm="ngForm" (ngSubmit)="save()">
+    <div class="form-group">
+      <label>Name</label>
+      <input [(ngModel)]="study.name" name="name" type="text" required #name="ngModel"/>
+      <span [hidden]="name.valid || !submitted" class="error">
+        Name is required
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Reference</label>
+      <input [(ngModel)]="study.reference" name="reference" type="text" required #reference="ngModel"/>
+      <span [hidden]="reference.valid || !submitted" class="error">
+        A reference is required
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input [(ngModel)]="study.description" name="description" type="text" required #description="ngModel"/>
+      <span [hidden]="description.valid || !submitted" class="error">
+        A description is required
+      </span>
+    </div>
+    <div class="form-group" *ngIf="study.initiator">
+      <label>Initiator</label>
+      <div class="form-group">
+        <label>Name</label>
+        <input [(ngModel)]="study.initiator.name" name="initiatorName" type="text" required #initiatorName="ngModel" />
+      </div>
+      <div *ngFor="let ud of study.initiator.userDetails">
+        <div class="form-group">
+          <label>{{ud.key}}</label>
+          <input [(ngModel)]="ud.value" name="{{ud.value}}" type="text" required />
+        </div>
+      </div>
+      <!--<div class="form-group">-->
+        <!--<label>Email</label>-->
+        <!--<input [ngModel]="study?.initiator?.email" (ngModelChange)="study.initiator.email" name="initiatorEmail" type="email" required #initiatorEmail="ngModel" />-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<label>Phone</label>-->
+        <!--<input [ngModel]="study?.initiator?.phone" (ngModelChange)="study.initiator.phone" name="initiatorPhone" type="tel" required #initiatorPhone="ngModel" />-->
+      <!--</div>-->
+    </div>
+    <div class="form-group">
+      <label>Collaborators</label>
+
+      <div *ngFor="let u of users">
+        <label>{{u.name}}</label>
+        <input type="checkbox" (change)="updateCheckedCollaborators(u, $event)" name="collaborators">
+      </div>
+
+      <!--<input [ngModel]="study?.description" (ngModelChange)="study.description" name="description" type="text" required #description="ngModel"/>-->
+      <!--<span [hidden]="description.valid || !description.touched" class="error">-->
+      <!--A description is required-->
+      <!--</span>-->
+    </div>
+    <div class="form-group">
+      <label>Acknowledgements</label>
+      <input [(ngModel)]="study.acknowledgements" name="acknowledgements" type="text" required #acknowledgements="ngModel" />
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button class="btn" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
