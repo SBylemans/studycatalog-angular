@@ -9,6 +9,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {StudyService} from "./study.service";
+import {AuthorizationService} from "./authorization.service";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {StudyService} from "./study.service";
     FormsModule
   ],
   providers: [
-    StudyService
+    StudyService,
+    AuthorizationService
   ],
   bootstrap: [AppComponent]
 })
