@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authorizationService.getUser().subscribe(function(user) {
-      this.user = new user;
+      this.user = user;
       this.authorizationService.user.emit(user);
     }.bind(this));
   }
